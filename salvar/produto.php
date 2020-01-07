@@ -28,29 +28,33 @@ foreach ($_POST as $key => $value) {
 
     }else if(empty ( $largura ) ) {            
             //update
-            $sql = "update produto set nome = :nome,
-                peso = :peso, altura = :altura, comprimento = :comprimento
-                where idproduto = :idproduto limit 1";
+            $sql = "update produto set nome = :nome, peso = :peso, altura = :altura, comprimento = :comprimento, largura = :largura, item_id = :item_id, quantidade = :quantidade , cliente_id = :cliente_id          
+                where id = :id limit 1";
             $consulta =  $pdo->prepare($sql);
             $consulta->bindValue(":nome",$nome);
-            $consulta->bindValue(":peso",$peso);
+            $consulta->bindValue(":peso",$peso);          
             $consulta->bindValue(":altura",$altura);
             $consulta->bindValue(":comprimento",$comprimento);
             $consulta->bindValue(":largura",$largura);
-            $consulta->bindValue(":idproduto", $idproduto);
+            $consulta->bindValue(":item_id",$item_id);
+            $consulta->bindValue(":quantidade",$quantidade);
+            $consulta->bindValue(":cliente_id",$cliente_id);
+            $consulta->bindValue(":id", $id);
 
         } else {
             //update
-            $sql = "update produto set nome = :nome,
-                peso = :peso, altura = :altura, comprimento = :comprimento, largura = :largura              
-                where idproduto = :idproduto limit 1";
+            $sql = "update produto set nome = :nome, peso = :peso, altura = :altura, comprimento = :comprimento, largura = :largura, item_id = :item_id, quantidade = :quantidade , cliente_id = :cliente_id          
+                where id = :id limit 1";
             $consulta =  $pdo->prepare($sql);
             $consulta->bindValue(":nome",$nome);
-            $consulta->bindValue(":peso",$peso);
+            $consulta->bindValue(":peso",$peso);          
             $consulta->bindValue(":altura",$altura);
             $consulta->bindValue(":comprimento",$comprimento);
             $consulta->bindValue(":largura",$largura);
-            $consulta->bindValue(":idproduto", $idproduto);
+            $consulta->bindValue(":item_id",$item_id);
+            $consulta->bindValue(":quantidade",$quantidade);
+            $consulta->bindValue(":cliente_id",$cliente_id);
+            $consulta->bindValue(":id", $id);
         }
             //executar
         if ( $consulta->execute() ) {            
@@ -58,7 +62,7 @@ foreach ($_POST as $key => $value) {
             $pdo->commit();
 
             $msg = "Registro inserido com sucesso!";
-            sucesso( $msg, "listar/produto" );
+            sucesso( $msg, "listar/envios" );
 
         } else {
             //erro do sql
@@ -68,3 +72,4 @@ foreach ($_POST as $key => $value) {
             mensagem( $msg );
         }
     }
+?>

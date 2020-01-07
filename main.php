@@ -47,7 +47,7 @@
                                       }else if("1" == $_SESSION["tcc"]["tipo"]){
                                         echo "<a class='dropdown-item' href='listar/clientedados'>Identidade</a>";
                                         echo "<a class='dropdown-item' href='listar/envios'>Envios</a>";
-                                        echo "<a class='dropdown-item' href='listar/produto'>Produtos</a>";
+                                        echo "<a class='dropdown-item' href='listar/pagamento'>Pagamentos</a>";
                                       }else if ("3" == $_SESSION["tcc"]["tipo"]){                                        
                                         echo "<a class='dropdown-item' href='listar/ativarcliente'>Ativar Cli.</a>";
                                         echo "<a class='dropdown-item' href='listar/clienteativos'>Desativar Cli.</a>";                                       

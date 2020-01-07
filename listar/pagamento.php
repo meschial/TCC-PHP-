@@ -1,7 +1,8 @@
 <?php
 
 
-	$idd = $_SESSION["tcc"]["id"];
+	$cliente = $_SESSION["tcc"]["id"];
+	$nome = $_SESSION["tcc"]["apelido"];
 ?>
 <div class="container">
 	<div class="coluna">
@@ -20,11 +21,9 @@
 
 			<thead>
 				<tr>
-					<td width="10%">ID item</td>
-					<td width="15%">status</td>
-					<td width="15%">data</td>
-					<td width="10%">rota</td>
-					<td width="28%">Enviar produtos</td>
+					<td width="10%">ID</td>
+					<td width="15%">Valor</td>
+					<td width="15%">Nome</td>
 					<td>Opções</td>
 				</tr>
 			</thead>
@@ -33,40 +32,25 @@
 
 
 					//selecionar os dados do editora
-					$sql = "select *, date_format(data_venda, '%d/%m/%Y') data_venda from item where cliente_id = $idd";
+					$sql = "select venda.id, venda.valor from venda 
+					inner join item on venda.item_id = item.id
+					where item.cliente_id = $cliente";
 					$consulta = $pdo->prepare($sql);
 					$consulta->execute();
 					//laço de repetição para separar as linhas
 					while ( $linha = $consulta->fetch(PDO::FETCH_OBJ)) {
 						//separar os dados
 						$id				= $linha->id;
-						$parada			= $linha->parada_id;
-						$status 		= $linha->status;
-						$data_venda 	= $linha->data_venda;
-						$rota_id 		= $linha->rota_id;
+						$valor 		= $linha->valor;
 
-						if ('0' == $parada) {
-							$id_rota = $rota_id;
-						}else{
-							$id_rota = $parada;
-						}
+						$valor = number_format($valor, 2, ",", ".");
+
+						
 						//montar as linhas e colunas da tabela
 						echo "<tr>
 							<td>$id</td>
-							<td>$status</td>
-							<td>$data_venda</td>
-							<td>$id_rota</td>
-							<td>";
-									if ('0' == $parada) {
-									echo "	<a type='button' href='cadastrar/novoproduto/$id' class='btn btn-outline-success'>Novo Produto</a>	
-									<a type='button' href='listar/produto/$id' class='btn btn-outline-primary'>Listar Produtos</a>	";
-									}else{
-									echo "	<a type='button' href='javascript:excluir($id)' class='btn btn-danger'>Parada</a>";
-									}
-
-								echo "
-								
-							</td>
+							<td>$valor</td>
+							<td>$nome</td>							
 							<td>
 								<a type='button' href='cadastrar/pagamento/$id' class='btn btn-success'>Enviar</a>								
 								<a type='button' href='javascript:excluir($id)' class='btn btn-danger'>Cancelar</a>								

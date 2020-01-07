@@ -3,7 +3,7 @@
 	if ( isset ( $p[2] ) ) {
 		$id = (int)$p[2];
 		//excluir a editora
-		$sql = "delete from produto where idproduto = ? limit 1";
+		$sql = "delete from produto where id = ? limit 1";
 		$consulta = $pdo->prepare( $sql );
 		$consulta->bindParam(1,$id);
 		//verificar se o registro foi excluido
