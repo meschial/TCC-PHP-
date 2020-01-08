@@ -150,9 +150,9 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <form action="listar/procurarrota" method="post" class="d-md-flex justify-content-between">
-                            <input type="text" name="cep_inicio" data-mask="99999-999" placeholder="Digite o CEP de partida" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Vai digita aqui'" required>
-                            <input type="text" name="cep_fim" data-mask="99999-999" placeholder="Digite o CEP de destino" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Vamos levar para voçê'" required>
-                             <input type="text" placeholder="Digite a Data de envio" name="data_inicio" data-mask="99/99/9999" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Pode ser hoje mesmo!'">
+                            <input type="text" name="cep_inicio" data-mask="99999-999" placeholder="CEP de partida" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Vai digita aqui'" required>
+                            <input type="text" name="cep_fim" data-mask="99999-999" placeholder="CEP de destino" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Vamos levar'" required>
+                             <input type="text" placeholder="Data de envio" name="data_inicio" data-mask="99/99/9999" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Hoje mesmo!'">
                            
                            
                             <button type="submit" class="template-btn">Pesquisar</button>

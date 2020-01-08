@@ -3,8 +3,10 @@
 	if ( !isset ( $pagina ) ) {
 		header("Location: index.php");
 	}
-  $id = "";
- $id = $_SESSION["tcc"]["id"];
+if (isset($_SESSION["tcc"]["id"])) {
+  $id = $_SESSION["tcc"]["id"];
+}
+ 
 ?>
     <!-- Header Area Starts -->
 	<header class="header-area main-header">
@@ -24,8 +26,13 @@
                     </div>                      
                     <div class="main-menu">
                         <ul>
-                            <li class="active"><a href="paginas/home">inicio</a></li>                            
-                            <li><a href="listar/todasrotas">Rotas</a></li>
+                            <li class="active"><a href="paginas/home"><b>inicio</b></a></li>                           
+                            <li><a href="">Todas as rotas</a>
+                                <ul class="sub-menu">
+                                    <li><a href="listar/todasrotas">Listar por tabela</a></li>
+                                    <li><a href="listar/todasrotascard">Listar por cards</a></li>
+                                </ul>
+                            </li>
                             <li><a href="#">Vantagens Me Leva</a>
                                 <ul class="sub-menu">
                                     <li><a href="#">Motorista</a></li>
