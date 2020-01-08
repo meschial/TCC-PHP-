@@ -39,9 +39,9 @@
 						//montar as linhas e colunas da tabela
 						echo "
 				    		<div class='form-group col-md-4'>
-								<div class='card'>
-									<div class='card-body'>
-										<h4 class='card-title'>Cidade: $cidade / UF:[$estado] </h4>
+								<div class='card border-success'>
+									<div class='card-header'>
+										<h4 class='card-title'><b>Cidade: $cidade / UF: $estado</b></h4>
 										<p hidden>ID:[$id]</p>
 									</div>
 									<ul class='list-group list-group-flush'>

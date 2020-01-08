@@ -30,13 +30,13 @@
 
 					echo "
 				    		<div class='form-group col-md-4'>
-								<div class='card'>
-									<div class='card-body'>
-										<h4 class='card-title'>Rota: $cidade_inicio / $cidade_fim </h4>
+								<div class='card border-primary'>
+									<div class='card-header'>
+										<h4 class='card-title'><b>Rota: $cidade_inicio / $cidade_fim </b></h4>
 										<p hidden>ID:[$id]</p>
 									</div>
 									<ul class='list-group list-group-flush'>
-										<li class='list-group-item'>CEP: $cep_inicio / $cep_fim</li>
+										<li class='list-group-item'>CEP $cep_inicio Para: $cep_fim</li>
 										<li class='list-group-item'>Data Rota: $data_inicio</li>
 										<li class='list-group-item'>Valor: $valor</li>
 									</ul>
@@ -76,9 +76,9 @@
 
 					echo "
 				    		<div class='form-group col-md-4'>
-								<div class='card'>
-									<div class='card-body'>
-										<h4 class='card-title'>Rota: $cidade_inicio / $cidade_fim </h4>
+								<div class='card border-primary'>
+									<div class='card-header'>
+										<h4 class='card-title'><b>Rota: $cidade_inicio / $cidade_fim </b></h4>
 										<p hidden>ID:[$idd]</p>
 									</div>
 									<ul class='list-group list-group-flush'>
@@ -98,7 +98,6 @@
 							</div>";
 				    }								
 
-			?>
-			
-</div>
+			?>			
+	</div>
 </div>
