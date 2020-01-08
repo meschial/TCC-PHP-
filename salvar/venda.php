@@ -7,7 +7,7 @@ foreach ($_POST as $key => $value) {
             $$key = trim ( $value );
         }
 
-   
+    $valor = formataValor( $valor );
     $pdo->beginTransaction();
 
 

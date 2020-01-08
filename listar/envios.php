@@ -68,9 +68,18 @@
 								echo "
 								
 							</td>
-							<td>
-								<a type='button' href='cadastrar/pagamento/$id' class='btn btn-success'>Enviar</a>								
-								<a type='button' href='javascript:excluir($id)' class='btn btn-danger'>Cancelar</a>								
+							<td>";if ('0' <> $parada) {
+								echo "<a type='button' href='cadastrar/pagamentoParada/$id' class='btn btn-success'>Enviar P</a>								
+								<a type='button' href='javascript:excluir($id)' class='btn btn-danger'>Cancelar</a>";
+							}else{
+								echo "
+									<a type='button' href='cadastrar/pagamento/$id' class='btn btn-success'>Enviar R</a>	
+								<a type='button' href='javascript:excluir($id)' class='btn btn-danger'>Cancelar</a>
+								";
+							}
+
+							echo "
+																
 							</td>
 						</tr>";
 					}
