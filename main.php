@@ -6,6 +6,7 @@
 if (isset($_SESSION["tcc"]["id"])) {
   $id = $_SESSION["tcc"]["id"];
 }
+include "paginas/modal.php";
  
 ?>
     <!-- Header Area Starts -->
@@ -85,44 +86,22 @@ if (isset($_SESSION["tcc"]["id"])) {
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Modal -->
-            <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">login</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-
-                  <div class="modal-body">
-                    <form class="form-inline" name="login" method="post" action="logar/login">                    
-                      <label class="sr-only" for="cpf">CPF</label>
-                      <input type="text" class="form-control mb-2 mr-sm-2" name="cpf" data-Mask="999.999.999-99" placeholder="Digite seu cpf">
-
-                      <label class="sr-only" for="senha">Senha</label>
-                      <input type="password" class="form-control mb-2 mr-sm-2" name="senha"  placeholder="Digite sua senha">                       
-                      <button type="submit"  class="btn btn-outline-success">Acessar</button> 
-                    </form>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>                   
-                  </div>
-                </div>
-              </div>
-            </div> 
+        </div>        
   </header>
   <!-- Header Area End -->     
             
 <main>
+
   <div style="margin: 0 50px;">
-    <?php
-      if ( file_exists ( $pagina ) ) include $pagina;
-      else include "paginas/erro.php";
+    <?php      
+      if ( file_exists ( $pagina ) ) {
+        include $pagina;
+      } else{
+       include "paginas/erro.php";
+       }
     ?>
   </div>
+
 </main>
 
 		<script type="text/javascript">
