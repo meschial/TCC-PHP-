@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 03-Dez-2019 às 20:06
+-- Generation Time: 08-Jan-2020 às 16:02
 -- Versão do servidor: 10.1.34-MariaDB
 -- PHP Version: 7.2.7
 
@@ -39,7 +39,7 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`id`, `foto`, `usuario_id`) VALUES
-(1, '1573657771', 1);
+(1, '1578172546', 1);
 
 -- --------------------------------------------------------
 
@@ -64,7 +64,7 @@ CREATE TABLE `endereco` (
 --
 
 INSERT INTO `endereco` (`id`, `cep`, `rua`, `complemento`, `bairro`, `cidade`, `estado`, `numero`, `usuario_id`) VALUES
-(1, '87501-130', 'Avenida Rio Branco', 'Casa', 'Zona I', 'Umuarama', 'PR', '518', 1);
+(1, '87501-130', 'Avenida Rio Branco', 'Casa', 'Zona I', 'Umuarama', 'PR', '356', 1);
 
 -- --------------------------------------------------------
 
@@ -73,10 +73,25 @@ INSERT INTO `endereco` (`id`, `cep`, `rua`, `complemento`, `bairro`, `cidade`, `
 --
 
 CREATE TABLE `item` (
-  `iditem` int(11) NOT NULL,
-  `produto_id` int(11) NOT NULL,
-  `rota_id` int(11) NOT NULL
+  `id` int(11) NOT NULL,
+  `data_venda` date NOT NULL,
+  `status` char(1) NOT NULL,
+  `rota_id` int(11) NOT NULL,
+  `parada_id` int(11) NOT NULL,
+  `cliente_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `item`
+--
+
+INSERT INTO `item` (`id`, `data_venda`, `status`, `rota_id`, `parada_id`, `cliente_id`) VALUES
+(1, '2020-01-04', '1', 1, 0, 1),
+(2, '2016-12-25', '1', 1, 0, 1),
+(3, '2020-01-08', '1', 1, 1, 1),
+(4, '1997-04-18', '1', 1, 2, 1),
+(5, '2020-01-08', '1', 1, 0, 3),
+(6, '2020-01-08', '1', 1, 2, 3);
 
 -- --------------------------------------------------------
 
@@ -97,7 +112,7 @@ CREATE TABLE `motorista` (
 --
 
 INSERT INTO `motorista` (`id`, `tipo_cnh`, `cnh`, `foto`, `usuario_id`) VALUES
-(3, 'B', '654.564.564-56', '1573665778', 2);
+(1, 'B', '333.333.333-33', '1578172572', 2);
 
 -- --------------------------------------------------------
 
@@ -109,7 +124,8 @@ CREATE TABLE `pagamento` (
   `id` int(11) NOT NULL,
   `tipo` varchar(50) NOT NULL,
   `valor` double NOT NULL,
-  `data` date NOT NULL
+  `data` date NOT NULL,
+  `venda_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -119,11 +135,21 @@ CREATE TABLE `pagamento` (
 --
 
 CREATE TABLE `parada` (
-  `idparada` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `cep` varchar(15) NOT NULL,
   `valor` double NOT NULL,
+  `cidade` varchar(60) NOT NULL,
   `rota_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `parada`
+--
+
+INSERT INTO `parada` (`id`, `cep`, `valor`, `cidade`, `rota_id`) VALUES
+(1, '87492-000', 25, 'Cida p 1', 1),
+(2, '87491-000', 40, 'teste cida', 1),
+(3, '87490-000', 55, 'cidade p 3', 2);
 
 -- --------------------------------------------------------
 
@@ -138,6 +164,8 @@ CREATE TABLE `produto` (
   `altura` varchar(10) NOT NULL,
   `comprimento` varchar(10) NOT NULL,
   `largura` varchar(10) NOT NULL,
+  `quantidade` char(3) NOT NULL,
+  `item_id` int(11) NOT NULL,
   `cliente_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -145,8 +173,18 @@ CREATE TABLE `produto` (
 -- Extraindo dados da tabela `produto`
 --
 
-INSERT INTO `produto` (`id`, `nome`, `peso`, `altura`, `comprimento`, `largura`, `cliente_id`) VALUES
-(1, 'teste', '5 KG', '60 CM', '60 CM', '60 CM', 1);
+INSERT INTO `produto` (`id`, `nome`, `peso`, `altura`, `comprimento`, `largura`, `quantidade`, `item_id`, `cliente_id`) VALUES
+(1, 'teste novo', '5', '5', '5', '5', '2', 1, 1),
+(2, 'novo', '8', '8', '8', '8', '1', 1, 1),
+(3, 'Caixa de sapato', '1', '30', '30', '30', '2', 1, 1),
+(5, 'teste de novo produro', '10', '10', '10', '10', '2', 2, 1),
+(6, 'alcool', '2', '3', '3', '3', '2', 2, 1),
+(7, 'caixa de tenis', '2', '2', '2', '2', '15', 2, 1),
+(8, 'produto parada', '5', '5', '5', '5', '2', 3, 1),
+(9, 'teste de envio', '6', '6', '6', '6', '15', 0, 1),
+(10, 'teste q deu ruim', '5', '4', '4', '4', '50', 4, 1),
+(11, 'super produto', '5', '5', '5', '5', '5', 5, 3),
+(12, 'teste', '2', '2', '2', '2', '15', 6, 3);
 
 -- --------------------------------------------------------
 
@@ -161,7 +199,8 @@ CREATE TABLE `rota` (
   `cep_inicio` varchar(15) NOT NULL,
   `cep_fim` varchar(15) NOT NULL,
   `data_inicio` date NOT NULL,
-  `data_fim` date NOT NULL,
+  `cidade_inicio` varchar(60) NOT NULL,
+  `cidade_fim` varchar(60) NOT NULL,
   `motorista_id` int(11) NOT NULL,
   `tamanho_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -170,8 +209,9 @@ CREATE TABLE `rota` (
 -- Extraindo dados da tabela `rota`
 --
 
-INSERT INTO `rota` (`id`, `quantidade`, `valor`, `cep_inicio`, `cep_fim`, `data_inicio`, `data_fim`, `motorista_id`, `tamanho_id`) VALUES
-(1, '5', 15, '87490-000', '87830-000', '1997-04-18', '0000-00-00', 2, 1);
+INSERT INTO `rota` (`id`, `quantidade`, `valor`, `cep_inicio`, `cep_fim`, `data_inicio`, `cidade_inicio`, `cidade_fim`, `motorista_id`, `tamanho_id`) VALUES
+(1, '5', 180, '87490-000', '87830-000', '1997-04-18', 'Nova Olímpia', 'Tapira', 2, 1),
+(2, '5', 25, '87491-000', '87501-130', '1997-04-18', 'Nova Olímpia', 'Umuarama', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -193,8 +233,7 @@ CREATE TABLE `tamanho` (
 --
 
 INSERT INTO `tamanho` (`id`, `descricao`, `peso`, `largura`, `comprimento`, `altura`) VALUES
-(1, 'PEQUENO', '1 KG', '30 CM', '30 CM', '30 CM'),
-(3, 'MÉDIO', '5 KG', '60 CM', '60 CM', '60 CM');
+(1, 'PEQUENO', '1KG', '30CM', '30CM', '30CM');
 
 -- --------------------------------------------------------
 
@@ -222,10 +261,9 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `nome`, `cpf`, `rg`, `data`, `email`, `senha`, `tipo`, `apelido`, `celular`, `celular2`, `ativo`) VALUES
-(1, 'Sou cliente', '111.111.111-11', '10.518.198-0', '1997-04-18', 'cliente@gmail.com', '$2y$10$jdaK2MKxnkCDit3UsFPzveChbAGuE5pOm35XHWuvm3UwFQ4ar5Xtu', '1', 'cliente', '(44)99176-6602', '', 's'),
-(2, 'Sou motorista', '222.222.222-22', '10.518.198-0', '1993-05-28', 'soumotorista@gmail.com', '$2y$10$/7d71nSfIZyJLmgp4r2G7OGX6IowRLCyOsr8Upsg3LhX/sR3/p8AS', '2', 'motorista', '(44)99911-1666', '', 's'),
-(3, 'Super', '333.333.333-33', '10.518.198-0', '1995-11-13', 'super@gmail.com', '$2y$10$zoMN7S8o/RNmCGhiPLsh2OOhp0r0.jG2yM6oLWkgzIeyyDl/uAUgC', '3', 'super', '(44)99917-6602', '', 's'),
-(4, 'MARCOS MURILO MESCHIAL', '098.775.139-51', '10.518.198-0', '1997-04-18', 'formatacaoumuarama@gmail.com', '$2y$10$YUzdO6ug1yqjtxUMZX3HAeWoxNtTEha8lqhIkmW55TOo/YQEr8zYy', '1', 'MARCOS', '(44)99917-6602', '', 'n');
+(1, 'cliente', '111.111.111-11', '10.518.198-0', '1997-04-18', 'cliente@gmail.com', '$2y$10$CyBzxc3LbkxN4xK7gUsE2OGzvDLIq1NrtfjD0SHWzXK0hUimD7oUG', '1', 'cliente', '(44)44444-4444', '', 's'),
+(2, 'motorista', '222.222.222-22', '1054584', '1998-05-20', 'motorista@gmail.com', '$2y$10$CyBzxc3LbkxN4xK7gUsE2OGzvDLIq1NrtfjD0SHWzXK0hUimD7oUG', '2', 'motorista', '(22)22222-2222', NULL, 's'),
+(3, 'super', '333.333.333-33', '21545', '2000-07-25', 'super#gmail.com', '$2y$10$CyBzxc3LbkxN4xK7gUsE2OGzvDLIq1NrtfjD0SHWzXK0hUimD7oUG', '3', 'super', '(33)33333-3333', NULL, 's');
 
 -- --------------------------------------------------------
 
@@ -234,12 +272,27 @@ INSERT INTO `usuario` (`id`, `nome`, `cpf`, `rg`, `data`, `email`, `senha`, `tip
 --
 
 CREATE TABLE `venda` (
-  `idvenda` int(11) NOT NULL,
-  `data` date NOT NULL,
-  `cliente_id` int(11) NOT NULL,
-  `pagamento_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
+  `valor` double NOT NULL,
   `item_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `venda`
+--
+
+INSERT INTO `venda` (`id`, `valor`, `item_id`) VALUES
+(1, 285, 2),
+(2, 285, 2),
+(3, 75, 1),
+(4, 285, 2),
+(5, 360, 3),
+(6, 50, 3),
+(7, 3.42, 2),
+(8, 3420, 2),
+(9, 2000, 4),
+(10, 900, 5),
+(11, 600, 6);
 
 --
 -- Indexes for dumped tables
@@ -261,7 +314,7 @@ ALTER TABLE `endereco`
 -- Indexes for table `item`
 --
 ALTER TABLE `item`
-  ADD PRIMARY KEY (`iditem`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `motorista`
@@ -279,7 +332,7 @@ ALTER TABLE `pagamento`
 -- Indexes for table `parada`
 --
 ALTER TABLE `parada`
-  ADD PRIMARY KEY (`idparada`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `produto`
@@ -309,7 +362,7 @@ ALTER TABLE `usuario`
 -- Indexes for table `venda`
 --
 ALTER TABLE `venda`
-  ADD PRIMARY KEY (`idvenda`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -331,13 +384,13 @@ ALTER TABLE `endereco`
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `iditem` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `motorista`
 --
 ALTER TABLE `motorista`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `pagamento`
@@ -349,37 +402,37 @@ ALTER TABLE `pagamento`
 -- AUTO_INCREMENT for table `parada`
 --
 ALTER TABLE `parada`
-  MODIFY `idparada` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `produto`
 --
 ALTER TABLE `produto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `rota`
 --
 ALTER TABLE `rota`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tamanho`
 --
 ALTER TABLE `tamanho`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `venda`
 --
 ALTER TABLE `venda`
-  MODIFY `idvenda` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
