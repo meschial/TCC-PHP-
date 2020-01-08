@@ -46,6 +46,10 @@
                         <input type="text" class="form-control" name="cep" id="cep" required data-mask="99999-999" placeholder="Digite novo cep">
                       </div>
                       <div class="form-group col-md-6">
+                        <label for="cidade">Cidade:</label></br>
+                        <input type="text" class="form-control" name="cidade" id="cidade" required  placeholder="Digite a cidade">
+                      </div>
+                      <div class="form-group col-md-6">
                         <label for="valor">Valor R$: </label>
                         <input type="text" name="valor"  class="form-control" required  value="<?=$valor;?>">
                       </div>

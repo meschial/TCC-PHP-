@@ -46,3 +46,14 @@
 				?>
 	</div>
 </div>
+	<script type="text/javascript">
+	//funcao em javascript para perguntar se quer mesmo excluir
+	function excluir(id) {
+		//perguntar
+		if ( confirm("Deseja mesmo excluir? Tem certeza?" ) ) {
+			//chamar a tela de exclusão
+			location.href = "excluir/pagamento/"+id;
+		}
+	}
+
+</script>

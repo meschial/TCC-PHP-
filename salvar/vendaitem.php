@@ -26,7 +26,7 @@ foreach ($_POST as $key => $value) {
             $consulta->bindValue(":parada_id",$parada_id);
             $consulta->bindValue(":cliente_id",$cliente_id);  
 
-    }            //executar
+    }           //executar
         if ( $consulta->execute() ) {            
             //salvar no banco
             $pdo->commit();

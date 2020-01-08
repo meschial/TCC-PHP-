@@ -33,6 +33,7 @@
             <div class="form-group col-md-3">
               <label for="item_id">ID Item:</label>
               <input  name="item_id" type="text"  value="<?=$id;?>" readonly class="form-control">
+              <input  name="id" type="text"   readonly class="form-control">
             </div>
             <div class="form-group col-md-3">
               <label for="Cliente">Cliente:</label>

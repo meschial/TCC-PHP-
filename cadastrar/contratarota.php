@@ -19,7 +19,7 @@ $idd = $_SESSION["tcc"]["id"];
     $consulta->execute();
     //recuperar os dados
     $dados = $consulta->fetch(PDO::FETCH_OBJ);
-    $id           = $dados->id;   
+    $rota_id           = $dados->id;   
     $valor        = $dados->valor;   
     $cep_inicio   = $dados->cep_inicio;   
     $cep_fim      = $dados->cep_fim;   
@@ -30,10 +30,15 @@ $idd = $_SESSION["tcc"]["id"];
 <div class="container">
    <form method="post" action="salvar/vendaitem">  
       <div class="form-row">
-            
+
+        <div class="form-group col-md-1">
+          <label for="cep">ID:</label>
+          <input type="text"  name="id" readonly class="form-control">
+        </div>
+
         <div class="form-group col-md-1">
           <label for="cep">ID Rota:</label>
-          <input type="text"  value="<?=$id;?>" name="rota_id" readonly class="form-control">
+          <input type="text"  value="<?=$rota_id;?>" name="rota_id" readonly class="form-control">
         </div>
         <div class="form-group col-md-1">
           <label for="cep">ID parada:</label>

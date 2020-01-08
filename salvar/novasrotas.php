@@ -12,14 +12,15 @@ foreach ($_POST as $key => $value) {
 
     if ( empty ( $id ) ) {       
      $sql = "insert into parada 
-     (id, cep, valor, rota_id) 
+     (id, cep, valor, cidade, rota_id) 
      values
-     (null, :cep, :valor, :rota_id)";
+     (null, :cep, :valor, :cidade, :rota_id)";
 
             //salvar no banco
             $consulta = $pdo->prepare( $sql );
             $consulta->bindValue(":cep",$cep);
             $consulta->bindValue(":valor",$valor);          
+            $consulta->bindValue(":cidade",$cidade);          
             $consulta->bindValue(":rota_id",$rota_id);
                
 
