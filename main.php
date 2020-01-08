@@ -13,7 +13,13 @@
                         <a href="index.php"><img src="assets/images/logo.jpg" alt="logo"></a>
                     </div>
                 </div>
-                <div class="col-lg-10">                     
+                <div class="col-lg-10"> 
+                <div class="custom-navbar">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>                      
                     <div class="main-menu">
                         <ul>
                             <li class="active"><a href="paginas/home">inicio</a></li>                            
