@@ -41,7 +41,7 @@ $idd = $_SESSION["tcc"]["id"];
         </div>         
         <div class="form-group col-md-2">
           <label for="cpf">IDD cliente:</label>
-          <input type="text"  value="<?=$idd;?>" readonly class="form-control">
+          <input type="text" name="cliente_id" value="<?=$idd;?>" readonly class="form-control">
         </div>
         <div class="form-group col-md-2">
           <label for="valor">Valor:</label>
