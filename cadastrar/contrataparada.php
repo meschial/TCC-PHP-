@@ -34,16 +34,16 @@ $idd = $_SESSION["tcc"]["id"];
       <div class="form-row">
             
         <div class="form-group col-md-1">
-          <label for="cep">ID Rota:</label>
-          <input  name="cep" type="text"  value="<?=$id;?>" readonly class="form-control">
+          <label for="rota_id">ID Rota:</label>
+          <input  name="rota_id" type="text"  value="<?=$id;?>" readonly class="form-control">
         </div>
         <div class="form-group col-md-1">
-          <label for="cep">ID Parada:</label>
-          <input  name="cep" type="text"  value="<?=$idparada;?>" readonly class="form-control">
+          <label for="parada_id">ID Parada:</label>
+          <input  name="parada_id" type="text"  value="<?=$idparada;?>" readonly class="form-control">
         </div>
         <div class="form-group col-md-2">
-          <label for="cpf">IDD cliente:</label>
-          <input type="text"  value="<?=$idd;?>" readonly class="form-control">
+          <label for="cliente_id">IDD cliente:</label>
+          <input type="text" name="cliente_id"  value="<?=$idd;?>" readonly class="form-control">
         </div>
         <div class="form-group col-md-2">
           <label for="valor">Valor:</label>

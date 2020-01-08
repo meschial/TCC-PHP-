@@ -59,9 +59,10 @@
 							<td>";
 									if ('0' == $parada) {
 									echo "	<a type='button' href='cadastrar/novoproduto/$id' class='btn btn-outline-success'>Novo Produto</a>	
-									<a type='button' href='listar/produto/$id' class='btn btn-outline-primary'>Listar Produtos</a>	";
+									<a type='button' href='listar/produto/$id' class='btn btn-outline-primary'>Listar Produtos</a>";
 									}else{
-									echo "	<a type='button' href='javascript:excluir($id)' class='btn btn-danger'>Parada</a>";
+									echo "	<a type='button' href='cadastrar/novoproduto/$id' class='btn btn-outline-success'>Novo Parada</a>	
+									<a type='button' href='listar/produto/$id' class='btn btn-outline-primary'>Listar Produtos</a>";
 									}
 
 								echo "
