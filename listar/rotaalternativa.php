@@ -29,7 +29,7 @@
 				if ( isset ( $p[2] ) ) {
 					$id = (int)$p[2];
 					//selecionar os dados do editora
-					$sql = "select parada.idparada, parada.cep, parada.valo from parada
+					$sql = "select parada.id, parada.cep, parada.valor from parada
 					inner join rota 
 					on rota.id = parada.rota_id
 					 where parada.rota_id = $id";
@@ -39,9 +39,9 @@
 					//laço de repetição para separar as linhas
 					while ( $linha = $consulta->fetch(PDO::FETCH_OBJ)) {
 						//separar os dados
-						$id 	= $linha->idparada;											
+						$id 	= $linha->id;											
 						$cep	= $linha->cep;
-						$valor 	= $linha->valo;
+						$valor 	= $linha->valor;
 						$valor = number_format($valor, 2, ",", ".");
 						//montar as linhas e colunas da tabela
 						echo "<tr>

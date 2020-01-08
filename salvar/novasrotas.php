@@ -10,38 +10,38 @@ foreach ($_POST as $key => $value) {
     $pdo->beginTransaction();
 
 
-    if ( empty ( $idparada ) ) {       
+    if ( empty ( $id ) ) {       
      $sql = "insert into parada 
-     (idparada, cep, valo, rota_id) 
+     (id, cep, valor, rota_id) 
      values
-     (null, :cep, :valo, :rota_id)";
+     (null, :cep, :valor, :rota_id)";
 
             //salvar no banco
             $consulta = $pdo->prepare( $sql );
             $consulta->bindValue(":cep",$cep);
-            $consulta->bindValue(":valo",$valo);          
+            $consulta->bindValue(":valor",$valor);          
             $consulta->bindValue(":rota_id",$rota_id);
                
 
     }else if(empty ( $cep ) ) {            
             //update
             $sql = "update rota set cep = :cep,
-                valo = :valo, partida = :partida, destino = :destino
-                where idparada = :idparada limit 1";
+                valor = :valor, partida = :partida, destino = :destino
+                where id = :id limit 1";
             $consulta =  $pdo->prepare($sql);
             $consulta->bindValue(":cep",$cep);
-            $consulta->bindValue(":valo",$valo);          
-            $consulta->bindValue(":idparada", $idparada);
+            $consulta->bindValue(":valor",$valor);          
+            $consulta->bindValue(":id", $id);
 
         } else {
             //update
             $sql = "update rota set cep = :cep,
-                valo = :valo
-                where idparada = :idparada limit 1";
+                valor = :valor
+                where id = :id limit 1";
             $consulta =  $pdo->prepare($sql);
             $consulta->bindValue(":cep",$cep);
-            $consulta->bindValue(":valo",$valo);
-            $consulta->bindValue(":idparada", $idparada);
+            $consulta->bindValue(":valor",$valor);
+            $consulta->bindValue(":id", $id);
         }
             //executar
         if ( $consulta->execute() ) {            

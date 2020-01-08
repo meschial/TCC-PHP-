@@ -36,8 +36,8 @@
 				}
 				$data_inicio = formataData( $data_inicio );
 				//sql da busca por valor
-				 $sql = "select parada.idparada, parada.cep, parada.valo, rota.cep_inicio, rota.cep_fim, rota.id, rota.valor, tamanho.descricao, date_format(data_inicio, '%d/%m/%Y') data_inicio from rota
-				 		left outer join parada on rota.id = parada.rota_id 				 		
+				 $sql = "select parada.id as 'idparada', parada.cep, parada.valor as 'valo', rota.cep_inicio, rota.cep_fim, rota.id, rota.valor, tamanho.descricao, date_format(data_inicio, '%d/%m/%Y') data_inicio from rota
+				 		left join parada on rota.id = parada.rota_id 				 		
 				 		inner join tamanho on tamanho.id = rota.tamanho_id
 			            where rota.cep_inicio = :cep_inicio
 			            and rota.cep_fim = :cep_fim

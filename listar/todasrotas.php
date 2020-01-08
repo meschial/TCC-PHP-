@@ -8,7 +8,7 @@
 					<td>CEP Destino</td>
 					
 					<td>Preço</td>
-					<td>Tamanho</td>										
+					<td>Data</td>										
 					<td width="12%">Contratar</td>										
 				</tr>
 			</thead>
@@ -22,12 +22,11 @@
 				
 				
 				//sql da busca por valor
-				 $sql = "select rota.id, rota.cep_inicio, rota.cep_fim, rota.valor, tamanho.descricao from rota
-				 inner join tamanho on rota.tamanho_id = tamanho.id";
+				$sql = "select *, date_format(data_inicio, '%d/%m/%Y') data_inicio from rota";
 
 				$consulta = $pdo->prepare( $sql );
 				$consulta = $pdo->prepare($sql);
-					$consulta->execute();
+				$consulta->execute();
 					//laço de repetição para separar as linhas
 					while ( $linha = $consulta->fetch(PDO::FETCH_OBJ)) {
 						//separar os dados
@@ -35,7 +34,7 @@
 					$cep_inicio		= $linha->cep_inicio;
 					$cep_fim  		= $linha->cep_fim;					
 					$valor 			= $linha->valor;
-					$tamanho 	= $linha->descricao;
+					$data_inicio	= $linha->data_inicio;
 
 					$valor = number_format($valor, 2, ",", ".");
 
@@ -46,12 +45,52 @@
 							<td>$cep_inicio</td>
 							<td>$cep_fim</td>
 							<td>R$: $valor</td>
-							<td>$tamanho</td>
+							<td>$data_inicio</td>
 							<td>";
 							if ('1'<>$tipo) {
 								echo " <a  type='button' href='paginas/home' class='btn btn-danger'>Seja um Cliente</a>";
 							}else{
 								echo " <a  type='button' href='cadastrar/contratarota/$id' class='btn btn-success'>Contratar</a>";
+							}
+							echo "
+							</td>													
+						</tr>";          
+				    }
+				    //sql da busca por valor
+				$sql = "select *, date_format(data_inicio, '%d/%m/%Y') data_inicio, rota.cep_fim, parada.cep, parada.valor, parada.id as 'idd' from parada 
+				right join rota on parada.rota_id = rota.id";
+
+				$consulta = $pdo->prepare( $sql );
+				$consulta = $pdo->prepare($sql);
+				$consulta->execute();
+					//laço de repetição para separar as linhas
+					while ( $linha = $consulta->fetch(PDO::FETCH_OBJ)) {
+						//separar os dados
+					$idd 			= $linha->idd;
+					$cep 			= $linha->cep;
+					$cep_fim  		= $linha->cep_fim;					
+					$valor 			= $linha->valor;
+					$data_inicio	= $linha->data_inicio;
+
+					$valor = number_format($valor, 2, ",", ".");
+
+					if (isset($cep)) {
+						$par = '2';
+					}
+
+					
+          				         //mostrar os dados dentro da linha da tabela (tr)
+					echo "<tr>							
+							<td>$idd</td>
+							<td>$cep</td>
+							<td>$cep_fim</td>
+							<td>R$: $valor</td>
+							<td>$data_inicio</td>
+							<td>";
+							if ('1'<>$tipo) {
+								echo " <a  type='button' href='paginas/home' class='btn btn-danger'>Seja um Cliente</a>";
+							}elseif ($par == '2') {
+								echo " <a  type='button' href='cadastrar/contrataparada/$idd' class='btn btn-success'>Contratar parada</a>";
 							}
 							echo "
 							</td>													

@@ -10,7 +10,7 @@
         echo "<script>location.href='paginas/home'</script>";
     }
     
- $id = $quantidade = $data_inicio = $cep_inicio = $cep_fim = $valor = "";
+ $id = $quantidade = $data_inicio = $cep_inicio = $cep_fim = $valor = $cidade_inicio = $cidade_fim = "";
   //$p[1] -> index.php (id do registro)
   if ( isset ( $p[2] ) ) {
     //selecionar os dados conforme o id
@@ -21,12 +21,14 @@
     //recuperar os dados
     $dados = $consulta->fetch(PDO::FETCH_OBJ);
 
-    $id       = $dados->id;    
-    $quantidade     = $dados->quantidade;
-    $data_inicio      = $dados->data_inicio;
-    $cep_inicio     = $dados->cep_inicio;
-    $cep_fim      = $dados->cep_fim;
-    $valor      = $dados->valor;
+    $id                 = $dados->id;    
+    $quantidade         = $dados->quantidade;
+    $data_inicio        = $dados->data_inicio;
+    $cep_inicio         = $dados->cep_inicio;
+    $cep_fim            = $dados->cep_fim;
+    $valor              = $dados->valor;
+    $cidade_inicio      = $dados->cidade_inicio;
+    $cidade_fim         = $dados->cidade_fim;
     
     $valor = number_format($valor, 2, ",", ".");
     
@@ -162,11 +164,11 @@
         <div class="form-row">
          <div class="form-group col-md-2">
           <label for="cidade">Cidade Inicio:</label>
-          <input type="text" id="cidade" name="cidade_inicio" readonly class="form-control">         
+          <input type="text" id="cidade" name="cidade_inicio" value="<?=$cidade_inicio;?>" readonly class="form-control">         
         </div>
         <div class="form-group col-md-2">
          <label for="cep_fim">Cidade Fim</label>
-         <input type="text" class="form-control" id="cidade2" readonly name="cidade_fim">
+         <input type="text" class="form-control" id="cidade2" value="<?=$cidade_fim;?>" readonly name="cidade_fim">
         </div>
          <div class="form-group col-md-2">
           <label for="tamanho">Tamanho:</label>

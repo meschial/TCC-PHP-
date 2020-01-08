@@ -13,16 +13,16 @@ $idd = $_SESSION["tcc"]["id"];
     
     //selecionar os dados conforme o id
 
-    $sql = "select rota.id, rota.cep_fim, parada.cep, parada.valo from rota
-            inner join parada on rota.id = parada.rota_id                 
-            where parada.idparada = $idparada limit 1";
+    $sql = "select parada.valor, parada.cep, rota.cep_fim, rota.id from parada
+    inner join rota on parada.rota_id = rota.id
+    where parada.id = $idparada";
     $consulta = $pdo->prepare( $sql );
     $consulta->bindParam(1,$p[2]);
     $consulta->execute();
     //recuperar os dados
     $dados = $consulta->fetch(PDO::FETCH_OBJ);
     $id           = $dados->id;   
-    $valor        = $dados->valo;   
+    $valor        = $dados->valor;   
     $cep_inicio   = $dados->cep;   
     $cep_fim      = $dados->cep_fim;   
     
@@ -30,7 +30,7 @@ $idd = $_SESSION["tcc"]["id"];
  
 ?>
 <div class="container">
-   <form method="post" action="salvar/ativarusuario">  
+   <form method="post" action="salvar/vendaitem">  
       <div class="form-row">
             
         <div class="form-group col-md-1">
@@ -61,28 +61,20 @@ $idd = $_SESSION["tcc"]["id"];
         </div>
      </div>
 
-        <div class="form-row">        
-        
-         <div class="form-group col-md-2">
-          <label for="tamanho">Produto:</label>
-          <select name="produto" id="produto" 
-          class="form-control" required data-parsley-required-message="Selecione uma opção">
+       <div class="form-group col-md-2">
+          <label for="data">Data Envio:</label>
+          <input type="text" name="data_venda" data-Mask="99/99/9999"  required class="form-control">
+        </div>
+        <div class="form-group col-md-2">
+          <label for="tamanho">Status:</label>
+          <select name="status" class="form-control" required data-parsley-required-message="Selecione uma opção">
             <option value="">Selecione</option>
-            <?php
-              $sql = "select nome from produto where cliente_id = $idd";
-                      $consulta = $pdo->prepare($sql);
-                      $consulta->execute();
-
-                      while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
-                        //recuperar as variaveis
-                        $id = $dados->id;
-                        $nome = $dados->nome;
-                        echo "<option value='$id'>$nome</option>";
-                  }
-            ?>
+            <option value="1">Aberto</option>
+            <option value="2">Cancelado</option>
+            <option value="3">Pago</option>
+            <option value="4">Entregue</option>            
           </select>
-        </div> 
-      </div> 
+        </div>
 
 
       <button type="submit" class="btn btn-primary">Enviar</button>

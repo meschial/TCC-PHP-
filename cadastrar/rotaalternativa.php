@@ -11,7 +11,7 @@
         echo "<script>location.href='paginas/home'</script>";
     }
 //passar vazio nos campos
-  $id  = $cep = $valo = "";
+  $id  = $cep = $valor = "";
 
   //$p[1] -> index.php (id do registro)
   if ( isset ( $p[2] ) ) {
@@ -31,7 +31,7 @@
                     <div class="form-row">
                       <div class="form-group col-md-6">
                         <label class="sr-only" for="id">Id</label>
-                        <input type="text" class="form-control mb-2 mr-sm-2 col-sm-2" name="idparada"  readonly placeholder="ID">
+                        <input type="text" class="form-control mb-2 mr-sm-2 col-sm-2" name="id"  readonly placeholder="ID">
                       </div>
                   
                       <div class="form-group col-md-6">
@@ -47,7 +47,7 @@
                       </div>
                       <div class="form-group col-md-6">
                         <label for="valor">Valor R$: </label>
-                        <input type="text" name="valo"  class="form-control" required  value="<?=$valo;?>">
+                        <input type="text" name="valor"  class="form-control" required  value="<?=$valor;?>">
                       </div>
                     </div> 
                       <button type="submit" class="btn btn-outline-success mb-2 mr-sm-2">Cadastrar</button>
