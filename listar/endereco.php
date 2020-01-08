@@ -3,11 +3,9 @@
  if  ( !isset ( $_SESSION["tcc"]["id"] ) ) {
     echo "<script>location.href='paginas/home'</script>";
   }
-
 	$id = $_SESSION["tcc"]["id"];
 ?>
-    <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="js/dataTables.bootstrap4.min.js"></script>
+
 <div class="container">
 	<div class="coluna">
 		<div class="row">
@@ -18,16 +16,11 @@
 				<a  type="button" href="cadastrar/endereco" class="btn btn-success">Cadast. Endereço</a>
 			</div>
 		</div>
-		<table class="table table-hover table-striped table-bordered">
-			<thead>
-				<tr>
-					<td width="10%">ID</td>
-					<td width="40%">CEP</td>
-					<td width="30%">Cidade</td>
-					<td>Opções</td>
-				</tr>
-			</thead>
-			<tbody>
+
+
+			<div class="container">
+				<div class="form-row">
+		
 				<?php
 					//selecionar os dados do editora
 					$sql = "select * from endereco where usuario_id = $id";
@@ -36,23 +29,38 @@
 					//laço de repetição para separar as linhas
 					while ( $linha = $consulta->fetch(PDO::FETCH_OBJ)) {
 						//separar os dados
-						$id 	= $linha->id;
-						$cep 	= $linha->cep;
-						$cidade = $linha->cidade;
+						$id 		 = $linha->id;
+						$cep 		 = $linha->cep;
+						$cidade 	 = $linha->cidade;
+						$complemento = $linha->complemento;
+						$rua 		 = $linha->rua;
+						$estado 	 = $linha->estado;
+						$numero 	 = $linha->numero;
 						//montar as linhas e colunas da tabela
-						echo "<tr>
-							<td>$id</td>
-							<td>$cep</td>
-							<td>$cidade</td>
-							<td>
-								<a  type='button' href='cadastrar/endereco/$id' class='btn btn-outline-primary'>Editar</a>
-								<a  type='button' href='javascript:excluir($id)' class='btn btn-danger'>Excluir</a>															
-							</td>
-						</tr>";						
+						echo "
+				    		<div class='form-group col-md-4'>
+								<div class='card'>
+									<div class='card-body'>
+										<h4 class='card-title'>Cidade: $cidade / UF:[$estado] </h4>
+										<p hidden>ID:[$id]</p>
+									</div>
+									<ul class='list-group list-group-flush'>
+										<li class='list-group-item'>CEP: $cep</li>
+										<li class='list-group-item'>Complemento: $complemento</li>
+										<li class='list-group-item'>Rua: $rua / N:$numero</li>
+									</ul>
+									<div class='card-body'>
+										<a  type='button' href='cadastrar/endereco/$id' class='btn btn-outline-primary'>Editar Endereço</a>
+										<a  type='button' href='javascript:excluir($id)' class='btn btn-outline-danger'>Excluir Endereço</a>	
+									</div>
+								</div>
+							</div>";
 					}
 				?>
-			</tbody>
-		</table>
+
+				</div>
+			</div>
+
 	</div>
 </div>
 <script type="text/javascript">
@@ -64,17 +72,4 @@
 			location.href = "excluir/endereco/"+id;
 		}
 	}
-	$(document).ready( function () {
-	    $('.table').DataTable( {
-        "language": {
-            "lengthMenu": "Mostrar _MENU_ resultados por página",
-            "zeroRecords": "Nenhum registro encontrado",
-            "info": "Mostrando página _PAGE_ de _PAGES_",
-            "infoEmpty": "No records available",
-            "infoFiltered": "(filtrando de _MAX_ em um total de registros)",
-            "search":"Buscar",
-            "Previous":"Anterior"
-        }
-    });
-	});
 </script>

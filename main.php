@@ -3,6 +3,8 @@
 	if ( !isset ( $pagina ) ) {
 		header("Location: index.php");
 	}
+  $id = "";
+ $id = $_SESSION["tcc"]["id"];
 ?>
     <!-- Header Area Starts -->
 	<header class="header-area main-header">
@@ -51,7 +53,7 @@
                                         echo "<a class='dropdown-item' href='listar/motorista'>Dados CNH</a>";
                                         echo "<a class='dropdown-item' href='listar/rotasmotorista'>Rotas</a>";
                                       }else if("1" == $_SESSION["tcc"]["tipo"]){
-                                        echo "<a class='dropdown-item' href='listar/clientedados'>Identidade</a>";
+                                        echo "<a class='dropdown-item' href='cadastrar/cliente/$id'>Identidade</a>";
                                         echo "<a class='dropdown-item' href='listar/envios'>Envios</a>";
                                         echo "<a class='dropdown-item' href='listar/pagamento'>Pagamentos</a>";
                                       }else if ("3" == $_SESSION["tcc"]["tipo"]){                                        
@@ -59,9 +61,9 @@
                                         echo "<a class='dropdown-item' href='listar/clienteativos'>Desativar Cli.</a>";                                       
                                         echo "<a class='dropdown-item' href='listar/tamanho'>Tamanhos</a>";                                       
                                         
-                                      }
-                                    ?>                                    
-            										    <a class="dropdown-item" href="listar/cliente">Editar Dados</a>
+                                      }                                                                   
+            										    echo " <a class='dropdown-item' href='cadastrar/usuario/$id'>Editar Dados</a>";
+                                    ?>    
             										    <a class="dropdown-item" href="sair.php">Sair</a>									    
             										  </div>
             								</div>
