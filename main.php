@@ -28,7 +28,7 @@ include "paginas/modal.php";
                     <div class="main-menu">
                         <ul>
                             <li class="active"><a href="paginas/home"><b>inicio</b></a></li>                           
-                            <li><a href="">Todas as rotas</a>
+                            <li><a href="">Todas as rota</a>
                                 <ul class="sub-menu">
                                     <li><a href="listar/todasrotas">Listar por tabela</a></li>
                                     <li><a href="listar/todasrotascard">Listar por cards</a></li>
